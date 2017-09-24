@@ -1,9 +1,9 @@
-var numSquares = 6;
+var numBoxes = 5;
 var colours=[];
 var pickedColour;
 
 //DOM 
-var squares = document.querySelectorAll(".square");
+var boxes = document.querySelectorAll(".box");
 var colourDisplay = document.getElementById("colourDisplay");
 var messageDisplay = document.querySelector("#message");
 var h1 = document.querySelector("h1");
@@ -17,7 +17,7 @@ init();
 function init() {
 	//mode buttons event listeners
 	setupModeButtons();
-	setupSquares();
+	setupBoxes();
 	reset();
 }
 
@@ -28,18 +28,28 @@ function setupModeButtons(){
 			//make sure that one mode has the class selected
 			modeButtons[0].classList.remove("selected");
 			modeButtons[1].classList.remove("selected");
+			modeButtons[2].classList.remove("selected");
 			this.classList.add("selected");
-			this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+			if (this.textContent === "1"){
+				numBoxes = 3;
+			}
+			else if (this.textContent === "2"){
+				numBoxes = 5;
+			}
+			else {
+				numBoxes = 10;
+			}
+			
 			reset();
 		});
 	}
 }
 
 //Determine game outcome
-function setupSquares(){
-	for(var i = 0; i < squares.length; i++){
-		//add click listeners to squares
-		squares[i].addEventListener("click", function(){
+function setupBoxes(){
+	for(var i = 0; i < boxes.length; i++){
+		//add click listeners to boxes
+		boxes[i].addEventListener("click", function(){
 			var clickedColour = this.style.backgroundColor;
 
 			//winner
@@ -60,21 +70,21 @@ function setupSquares(){
 
 //Reset Game function
 function reset(){
-	colours = generateRandomColours(numSquares); 
+	colours = generateRandomColours(numBoxes); 
 	//pick a new random colour from array
 	pickedColour = pickColour();
 	//change colourDisplay to macth picked Colour
 	colourDisplay.textContent = pickedColour;
-	//change colours of squares
-	for(var i = 0; i < squares.length; i++){
+	//change colours of boxes
+	for(var i = 0; i < boxes.length; i++){
 		if(colours[i]){
-			//renders all squares as a block element incase its has been set to none
-			squares[i].style.display = "block";
-			squares[i].style.backgroundColor = colours[i];
+			//renders all boxes as a block element incase its has been set to none
+			boxes[i].style.display = "block";
+			boxes[i].style.backgroundColor = colours[i];
 		}
 		//hides colour
 		else {
-			squares[i].style.display = "none";
+			boxes[i].style.display = "none";
 		}
 	}
 	h1.style.backgroundColor = "steelblue";
@@ -91,10 +101,10 @@ resetButton.addEventListener("click", function(){
 
 //Used for winning scenario
 function changeColours(colour){
-	//loop through all squares
-	for(var i = 0; i < squares.length; i++) {
+	//loop through all boxes
+	for(var i = 0; i < boxes.length; i++) {
 		//change each colour to match given colour
-		squares[i].style.backgroundColor = colour;
+		boxes[i].style.backgroundColor = colour;
 	}
 }
 
