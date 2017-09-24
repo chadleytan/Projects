@@ -98,7 +98,6 @@ resetButton.addEventListener("click", function(){
 	reset();
 });
 
-
 //Used for winning scenario
 function changeColours(colour){
 	//loop through all boxes
