@@ -1,0 +1,17 @@
+<% include ./partials/header %>
+
+<div class="view2">
+	<div class="container">
+	<h2 id="landinglogo">Choose Song<h2>
+	<p id="artist"; style ="color:#black; font-size:30px; padding-top:50px;" align="center"> Top 15 songs by <span id="selectedArtistName"><%= search.toUpperCase() %></span>:</p>
+	<div id ='songNames'>
+		<ul id="songList">
+			<% tracks.forEach(function(track) { %>
+				<li id="<%= track["name"].toUpperCase()%>" class="selectSong"> <%= track["name"].toUpperCase() %> </li>
+			<%});%>
+		</ul>
+	</div>
+</div>
+</div>
+
+<% include ./partials/footer %>

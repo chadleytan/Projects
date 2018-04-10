@@ -1,0 +1,27 @@
+<% include ./partials/header %>
+
+<div class="view3">
+	<div class="container">
+		<div class="guessSongContent" id="content">
+			<p style="display: none" id="hiddenSongName"><%=song%></p>
+			<div class="guessSongInstruction">
+				<p class="h1" id="landinglogo">GUESS THE SONG BY: <span id=songtitle><%= search %></span></p>
+			</div>
+
+    	</div>
+    	<pre> <%= lyrics %></pre>
+	</div>
+    <div class="container">
+		<div class="row">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-2">
+			    <input class="input" id="guessSongInput" type="text" name="fname" style="width:160px">
+			    <button class="btn btn-block btn-primary" id="submitGuess">Guess</button>
+		</div>
+		<div class="col-sm-5"></div>
+	</div>
+
+	</div>
+</div>
+
+<% include ./partials/footer %>

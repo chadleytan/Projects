@@ -1,0 +1,20 @@
+<% include ./partials/header %>
+
+	<div class = "container" style="margin-top:80px;">
+		<div id="howtop">
+<h2 id="landinglogo">LEADERBOARDS</h2>
+<% users.forEach(function(user) {%>
+	<%if (user.gamesPlayed == 0){%>
+		<% var accuracy = 100;%>
+	<%} else {%>
+		<% var accuracy = user.score / user.gamesPlayed*100 %>
+	<%}%>
+	<p>
+		Username: <%=user.username%>, Score: <%=user.score%>, GamesPlayed: <%=user.gamesPlayed%>, Accuracy: <%=accuracy%>%
+		<a href="/leaderboards/<%=user._id%>" class="btn btn-primary">More Info</a>
+	</p>
+<% }); %>
+</div>
+</div>
+
+<% include ./partials/footer %>

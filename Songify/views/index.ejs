@@ -1,0 +1,51 @@
+<% include ./partials/header %>
+
+<div class="view1">
+	<div class="container">
+	<div class="row" id="options">
+		<div class="col-1"></div>
+		<div class="col-10">
+			<div class ="col-12">
+			<p class="intro" >Select Artist</p>
+			<div id="topArtists">
+				<span id="topartistlabel">Top Artists:</span>
+			</div>
+			<% if (currentUser) { %>
+				<button class="btn btn-block btn-info" id="addFavs">Add Artist to Favourites</button>
+			<% } %>
+			<div id="searchBar">
+				<input id="searchArtist" type="text" name="search" placeholder="OR Search for an Artist..." class="search form-control mr-sm-2">
+			</div>
+			<p id="selectedartistdisplay"> SELECTED ARTIST: None</p>
+		</div>
+		<div class="col-12">
+			<div id="gameType">
+				<p >Select Game Type</p>
+			</div>
+			<div class="row" id="op">
+				<div class="col col-lg-6 col-md-6 col-sm-12 col-12 lyricsOp selectedOption" >
+					<p class="lyrics">Guess Lyrics</p>
+				</div>
+				<div class="col col-lg-6 col-md-6 col-sm-12 col-12 songOp" >
+					<p class="song">Guess Song</p>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="col-1"></div>
+	</div>
+	<div id="playbutton">
+		<div class="row">
+
+			<div class="col-4"></div>
+			<div class="col-4">
+				<button class="btn btn-block btn-primary play">PLAY</button>
+			</div>
+
+			<div class="col-4"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ./partials/footer %>

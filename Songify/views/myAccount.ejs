@@ -1,0 +1,27 @@
+<% include ./partials/header %>
+
+<div class="container">
+	<div style="text-align: center; padding-top:30px;"?>
+	<h1 id="landinglogo">My Account</h1>
+	<h4>Username: <%=currentUser.username%></h4>
+	<h4>Score: <%=currentUser.score%></h4>
+	<h4>Games Played: <%=currentUser.gamesPlayed%></h4>
+	<%if (currentUser.gamesPlayed == 0){%>
+		<% var accuracy = 100;%>
+	<%} else {%>
+		<% var accuracy = currentUser.score / currentUser.gamesPlayed*100 %>
+	<%}%>
+	<h4>Accuracy: <%=accuracy%>%</h4>
+	<h4>Favourite Artists:</h4> </div>
+	<ul>
+	<% currentUser.favArtists.forEach(function(artist){ %>
+		<li class="favouritedArtists"> <%= artist%> </li>
+	<% }); %>
+	</ul>
+
+	<input type="hidden" name="user" value="<%= currentUser.username %>">
+	<button type="submit" class="btn btn-primary" id="deleteAccount">DELETE ACCOUNT</button>
+	</div>
+</div>
+
+<% include ./partials/footer %>

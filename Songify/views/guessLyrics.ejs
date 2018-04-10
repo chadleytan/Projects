@@ -1,0 +1,27 @@
+<% include ./partials/header %>
+
+<div class="view4" style="margin-top: 30px;">
+	<div class="container">
+	<p style="display: none" id="hiddenAnswers"><%= answers %></p>
+	<h2 id="landinglogo">GUESS THE LYRICS: <%= song.toUpperCase()%> by <%= search.toUpperCase()%></h2>
+	<p style="text-align:center;"><%=lyrics%></p>
+	<div>
+
+		<div class="container">
+		<div class="row">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-2" style="text-align:center;">
+				<% for (var i = 0; i < 1; i++){ %>
+					<% var blank = "blank" + (i+1)%>
+					<span>BLANK <%=i+1%>: </span><input type="text" class="<%=blank%>">
+				<% } %>
+			    <button class="btn btn-block btn-primary" id="lyricsGuess">GUESS</button>
+		</div>
+		<div class="col-sm-5"></div>
+
+
+	</div>
+	</div>
+</div>
+
+<% include ./partials/footer %>

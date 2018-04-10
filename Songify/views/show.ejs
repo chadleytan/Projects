@@ -1,0 +1,22 @@
+<% include ./partials/header %>
+
+<div class="container">
+<div style="text-align: center; padding-top:30px;"?
+<h1 id="landinglogo"><%= user.username%>'s' Account</h1>
+<h4>Score: <%=user.score%></h4>
+<h4>Games Played: <%=user.gamesPlayed%></h4>
+<%if (user.gamesPlayed == 0){%>
+	<% var accuracy = 100;%>
+<%} else {%>
+	<% var accuracy = user.score / user.gamesPlayed*100 %>
+<%}%>
+<h4>Accuracy: <%=accuracy%>%</h4>
+<h4>Favourite Artists:</h4> </div>
+<ul>
+<% user.favArtists.forEach(function(artist){ %>
+	<li > <%= artist%> </li>
+<% }); %>
+</ul>
+</div>
+
+<% include ./partials/footer %>
