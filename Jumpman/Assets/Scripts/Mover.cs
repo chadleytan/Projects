@@ -12,7 +12,7 @@ public class Mover : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 	}
 
-	void Update () {
+	void FixedUpdate () {
 		rb.MovePosition(transform.position + Vector3.left * Time.deltaTime * speed);
 	}
 
