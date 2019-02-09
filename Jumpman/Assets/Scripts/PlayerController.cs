@@ -6,21 +6,21 @@ public class PlayerController : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	private float force = 350.0f;
-	public bool isJumping;
+	public bool canJump;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-		isJumping = false;
+		canJump = true;
 	}
 	
 	void FixedUpdate () {
-		if (Input.GetButtonDown("Jump") && !isJumping)  {
-			isJumping = true;
+		if (Input.GetButtonDown("Jump") && canJump)  {
+			canJump = false;
 			rb.AddForce(transform.up * force);
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {
-		isJumping = false;
+		canJump = true;
 	}
 }
