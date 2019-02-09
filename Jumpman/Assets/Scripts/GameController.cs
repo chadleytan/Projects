@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 	private GameObject nextBlock;
 	private GameObject prevBlock;
 
-
+	// Position where blocks spawn
 	private Vector3 spawnPosition = new Vector3(13.5f, -4.0f, 0.0f);
 
 	void Start () {
@@ -17,18 +17,23 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		//Generate new block when previous block has passed certain point
 		if (nextBlock.transform.position.x <= 8.75f) {
 			nextBlock = MakeNextBlock();
 			Debug.Log("Block Name: "+ nextBlock.name);
 		}
 	}
 
+
+	// Generates a new block
 	GameObject MakeNextBlock () {
 		GameObject block = ChooseNextBlock();
 		Quaternion spawnRotation = Quaternion.identity;
 		return Instantiate(block, spawnPosition, spawnRotation);
 	}
 
+	// Generate the next possible choices for a block based on previously generated
 	GameObject [] GenerateNextChoices() {
 		
 
@@ -67,14 +72,14 @@ public class GameController : MonoBehaviour {
 		return blocks;
 	}
 
+	// Randomly select from next possible choices
 	GameObject ChooseNextBlock() {
 		GameObject nextChoice;
-		// Randomly choose the next possible block
 
 		GameObject [] nextChoices = GenerateNextChoices();
 		nextChoice = nextChoices[Random.Range(0, nextChoices.Length)];
 
-		// Record previous block for next iteration
+		// Record previous block for next iteration so player can make jumps
 		if (nextChoice.name.Contains("NoBlock")) {
 			prevBlock = nextBlock;
 		}
