@@ -1,28 +1,55 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
 	public GameObject[] blocks;
 	private GameObject nextBlock;
 	private GameObject prevBlock;
+	private AudioSource music;
+
+	public Text scoreText;
+	public Text restartText;
+	public Text titleText;
+	public Text instructionText;
 
 	private bool gameOver;
+	private bool gameStart;
 	private bool restart;
+	private float score;
 
 	// Position where blocks spawn
 	private Vector3 spawnPosition = new Vector3(13.5f, -4.0f, 0.0f);
 
 	void Start () {
-		gameOver = false;
+		music = GetComponent<AudioSource>();
+
+		gameStart = false;
+		gameOver = true;
 		restart = false;
+		score = 0;
+
+		titleText.text = "Jumpman";
+		scoreText.text = "";
+		restartText.text = "";
+		instructionText.text = "Press 'Space' to Begin";
+
 		nextBlock = GameObject.FindGameObjectWithTag("FirstBlock");
 	}
 
 	void Update ()
-	{
-		if (restart)
+	{	
+		if (!gameStart && Input.GetKeyDown("space")) {
+			gameStart = true;
+			gameOver = false;
+			titleText.text = "";
+			instructionText.text = "";
+			music.Play();
+		}
+
+		if (restart && gameOver)
 		{
 			if (Input.GetKeyDown (KeyCode.R))
 			{
@@ -38,6 +65,10 @@ public class GameController : MonoBehaviour {
 		if (nextBlock.transform.position.x <= 8.75f) {
 			nextBlock = MakeNextBlock();
 			Debug.Log("Block Name: "+ nextBlock.name);
+		}
+
+		if (!gameOver) {
+			AddScore ();
 		}
 	}
 
@@ -104,6 +135,14 @@ public class GameController : MonoBehaviour {
 	
 	}
 
+	void AddScore() {
+		score += Time.deltaTime;
+		UpdateScore();
+	}
+	void UpdateScore() {
+		scoreText.text = "Time: " + Mathf.RoundToInt(score) + "s";
+	}
+
 	public bool getGameStatus() {
 		return gameOver;
 	}
@@ -111,5 +150,9 @@ public class GameController : MonoBehaviour {
 	public void GameOver() {
 		gameOver = true;
 		restart = true;
+		titleText.text = "GameOver";
+		restartText.text = "Press 'R' to Restart";
+		scoreText.text = "Final " + scoreText.text; 
+		music.Stop();
 	}
 }
