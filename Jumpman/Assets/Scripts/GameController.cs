@@ -8,11 +8,27 @@ public class GameController : MonoBehaviour {
 	private GameObject nextBlock;
 	private GameObject prevBlock;
 
+	private bool gameOver;
+	private bool restart;
+
 	// Position where blocks spawn
 	private Vector3 spawnPosition = new Vector3(13.5f, -4.0f, 0.0f);
 
 	void Start () {
+		gameOver = false;
+		restart = false;
 		nextBlock = GameObject.FindGameObjectWithTag("FirstBlock");
+	}
+
+	void Update ()
+	{
+		if (restart)
+		{
+			if (Input.GetKeyDown (KeyCode.R))
+			{
+				Application.LoadLevel(Application.loadedLevel);
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -26,7 +42,7 @@ public class GameController : MonoBehaviour {
 	}
 
 
-	// Generates a new block
+	// Generates a new block and return instantiated block
 	GameObject MakeNextBlock () {
 		GameObject block = ChooseNextBlock();
 		Quaternion spawnRotation = Quaternion.identity;
@@ -72,7 +88,7 @@ public class GameController : MonoBehaviour {
 		return blocks;
 	}
 
-	// Randomly select from next possible choices
+	// Randomly select from next possible choices and return next choice
 	GameObject ChooseNextBlock() {
 		GameObject nextChoice;
 
@@ -86,5 +102,14 @@ public class GameController : MonoBehaviour {
 		
 		return nextChoice;
 	
+	}
+
+	public bool getGameStatus() {
+		return gameOver;
+	}
+
+	public void GameOver() {
+		gameOver = true;
+		restart = true;
 	}
 }
