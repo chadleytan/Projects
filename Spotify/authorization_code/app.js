@@ -51,6 +51,8 @@ app.get('/login', function(req, res) {
     'streaming',
     'user-read-birthdate',
     'user-read-private',
+    'user-read-playback-state',
+    'user-read-currently-playing',
     'user-modify-playback-state'
   ]
 

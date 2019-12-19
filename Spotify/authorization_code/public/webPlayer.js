@@ -20,6 +20,7 @@ function startWebPlayer(access_token){
             console.log(state)
             $('#current-track').attr('src', state.track_window.current_track.album.images[0].url);
             $('#current-track-name').text(state.track_window.current_track.name);
+            $('#track-length').text(calculateLength(state.duration));
         });
 
         // Ready
@@ -28,6 +29,12 @@ function startWebPlayer(access_token){
         
             // Play a track using our new device ID
             play(data.device_id, access_token);
+
+            $("#skip-pos").click(function(){
+                var time = document.getElementById("time-skip").value;
+                console.log(time);
+                skipToPosition(player, time);
+            });
         });
 
         // Not Ready
@@ -55,4 +62,16 @@ function play(device_id, access_token) {
         console.log(data)
     }
     });
+}
+
+// Skip to a certain position in the song
+function skipToPosition(player, time) {
+    player.seek(time * 1000).then(() => {
+        console.log('Changed position!');
+    });
+}
+
+// Return the length of a track in mins the number of ms
+function calculateLength(number) {
+    return "" + Math.floor(number/1000.0/60) + ":" + Math.round((number / 1000) % 60)
 }
