@@ -14,27 +14,24 @@
         width: 500px;
       }
     </style>
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
-    <script src="/webPlayer.js"></script>
+        <script src="https://sdk.scdn.co/spotify-player.js"></script>
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+        <script src="webplayer.js"></script>
   </head>
 
   <body>
     <div class="container">
       <div id="login">
-        <h1>Welcome to the Spotify Mixer</h1>
+        <h1>Welcome to Spotify Mixer!</h1>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedin">
         <div id="user-profile">
         </div>
-        <div id="web-play">
-          <h2>Currently Playing</h2>
-          <img id="current-track"/>
-          <h3 id="current-track-name"></h3>
-          <h4 id="track-length"></h4>
-          <input type="number" id="time-skip" value=0>
-        </div>
-        <button class="btn btn-default" id="skip-pos">Skip to Position</button>
         <div id="oauth">
         </div>
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
@@ -59,6 +56,12 @@
           </dl>
         </div>
       </div>
+      <div class="container">
+        <input type="button" value="Play" id="play-track">
+        <label for="time_to_skip">Skip to time: </label>
+        <input type = "number" id="time-skip">
+        <input type="button" value="Skip" id="skip-pos">
+      </div>
     </script>
 
     <script id="oauth-template" type="text/x-handlebars-template">
@@ -69,8 +72,6 @@
       </dl>
     </script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
       (function() {
 
@@ -111,6 +112,7 @@
               access_token: access_token,
               refresh_token: refresh_token
             });
+            console.log(access_token);
 
             startWebPlayer(access_token);
 
@@ -149,7 +151,6 @@
         }
       })();
     </script>
-
-
   </body>
 </html>
+
